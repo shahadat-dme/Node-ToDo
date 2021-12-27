@@ -1,6 +1,7 @@
 var express=require("express");
 var mongoose=require("mongoose");
 var bodyParser=require("body-parser");
+
 var app=express();
 
 app.set('view engine','ejs');
@@ -21,23 +22,11 @@ const item3=new Item({
     name:"Introvert",
 });
 const d=[item1,item2,item3];
-/*
-Item.insertMany(d,function(err)
-{
-    if(err){
-        console.log(err);
-    }
-    else{
-        console.log("Successfully saved items to DB");
-    }
-});
-*/
+
 app.get("/",function(req,res)
 {
-   // res.send("<h1>Hey guys!!</h1>");
    Item.find({},function(err,f)
    {
-      // console.log(f);
       if(f.length===0)
       {
         Item.insertMany(d,function(err)
@@ -60,10 +49,7 @@ app.get("/",function(req,res)
 app.post("/",function(req,res)
 {
      const itemName=req.body.n;
-    //console.log(i);
-    //i1.push(i);
-    //res.render("list",{newListItem:i});
-   // res.redirect("/");
+
    const item=new Item({
        name:itemName
    });
